@@ -58,15 +58,30 @@ export default function App() {
 
 
     return (
-        <div>
-            {
-                listaProdutos.map( ( objeto) =>
-                  <div key={objeto.id}>
-                          <p>{objeto.item}</p>
-                  </div>
-                
-                )
-            }
+        <div className="bloco-principal">
+            <div className="bloco-produtos">
+                {
+                    listaProdutos.map((produto)=>
+                    <div key={produto.id}>
+                        <img src={produto.imagem}/>
+                        <p>. {produto.item} </p>
+                        <button onClick={() =>
+                            adiconarProdutoPedido(produto)}>Quero</button>
+                     </div>
+                    )
+                }
+            </div>
+            <div className="bloco-pedidos">
+                <p>Meus pedidos</p>
+                {
+                    listaPedidos.map((produto)=>
+                    <div key={produto.id}>
+                        <p>{produto.item}</p>
+                        </div>
+                    )
+                }
+
+            </div>
         </div>
-      );
+    );
 }
