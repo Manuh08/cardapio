@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../src/globals.css";
 
-
 export default function App() {
     const [listaProdutos, setProdutos] = useState([
 
@@ -52,42 +51,48 @@ export default function App() {
             preco: "R$ 8,99"
 
         },
-
     ]);
-   
-
-
+    
+    const [listaPedidos, setPedidos] = useState([]);
+    const adicionarProdutoPedido = (produto) => {  
+        setPedidos([...listaPedidos, produto]);
+    }
+    console.table(listaPedidos);
     return (
-        <div className="bloco-principal">
+        <div className="bloco-principal" >
             <div className="bloco-produtos">
                 {
-                    listaProdutos.map((produto)=>
-                    <div key={produto.id}>
-                        <img src={produto.imagem}/>
-                        <p>. {produto.item} </p>
-                        <button onClick={() =>
-                            adiconarProdutoPedido(produto)}>Quero</button>
-                     </div>
-                    )
+                  listaProdutos.map((produto)=> 
+                      <div key={produto.id}>
+                             <img src={produto.imagem}/>
+                            <p> { produto.item} </p>
+                            <button onClick={() => 
+                                adicionarProdutoPedido(produto)}>Quero</button>
+                      </div>
+                )
                 }
             </div>
             <div className="bloco-pedidos">
-                <p>Meus pedidos</p>
+                 <p>Meus Pedidos</p>
+
+                 <table>
+                <tr>
                 <th>Nome</th>
                 <th>Preço</th>
-                {
-                    listaPedidos.map((produto)=>
-                    <div key={produto.id}>
-                        <table>
-                            <tr><p>{produto.item}</p></tr>
-                            <tr><p>{produto.preco}</p></tr>
-                       
-                        </table>
-                        
-                        </div>
-                    )
-                }
+                </tr>
 
+                   { 
+                      listaPedidos.map((produto)=>
+                        <tr key={produto.id}>
+                            
+                                <td><p>{produto.item}</p></td>
+                                <td><p>{produto.preco}</p></td>
+                                
+                            </tr>
+                        )  
+                   }
+                   </table>
+                   
             </div>
         </div>
     );
